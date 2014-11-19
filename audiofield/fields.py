@@ -261,15 +261,6 @@ class AudioField(FileField):
             audio_field = StdAudioField(filename)
             setattr(getattr(instance, self.name), 'audio_converted', audio_field)
 
-    def formfield(self, **kwargs):
-        '''Specify form field and widget to be used on the forms'''
-        from audiofield.widgets import AdminAudioFileWidget
-        from audiofield.forms import AudioFormField
-        kwargs['widget'] = AdminAudioFileWidget
-        kwargs['form_class'] = AudioFormField
-
-        return super(AudioField, self).formfield(**kwargs)
-
     def save_form_data(self, instance, data):
         '''Overwrite save_form_data to delete audio files if "delete" checkbox
         is selected'''
